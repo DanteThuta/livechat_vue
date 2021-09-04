@@ -1,6 +1,6 @@
 import firebase from "firebase/app"
 import "firebase/firestore"
-import "firebase/auth"
+import "firebase/auth" //auth function for creating User Email
 
 const firebaseConfig = {
 

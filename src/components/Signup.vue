@@ -29,6 +29,9 @@ export default {
                 if(!res){
                     throw new Error ("Could not create New User")
                 }
+                
+                // to check & update displayName
+                res.user.updateProfile({displayName:displayName.value})
                 console.log(res.user);
             }
             catch(err){
