@@ -11,16 +11,32 @@
 
 <script>
 import { ref } from 'vue'
+import {auth} from '../firebase/config'
 export default {
     setup(){
         let displayName = ref("");
         let email = ref("");
         let password = ref("");
 
-        let SignUp=()=>{
-            console.log(displayName.value,email.value,password.value)
-        }
+        let error = ref(null);//for Error Handling
 
+        let SignUp=async()=>{
+            try{
+                // console.log(displayName.value,email.value,password.value);
+
+                //new Tag for creating User Email with Firebase Auth
+                let res = await auth.createUserWithEmailAndPassword(email.value,password.value)
+                if(!res){
+                    throw new Error ("Could not create New User")
+                }
+                console.log(res.user);
+            }
+            catch(err){
+                error.value = err.message;
+                console.log(err.message);
+            }
+        }
+        
         return {displayName,email,password,SignUp}
     }
 }
