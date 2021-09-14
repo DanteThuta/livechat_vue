@@ -17,7 +17,7 @@ import {auth} from '../firebase/config'
 import useLogin from '../composables/useLogin'
 
 export default {
-    setup(){
+    setup(props,context){
         let email = ref("");
         let password = ref("");
 
@@ -25,7 +25,8 @@ export default {
 
         let Login=async()=>{
             let res = await SignIn(email.value,password.value);
-            console.log(res.user);
+            // console.log(res.user);
+            context.emit("enterChatroom");//emitting a Function to Parent from child 
         }
         return {email,password,Login,error}
     }

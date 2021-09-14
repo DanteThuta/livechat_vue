@@ -17,7 +17,7 @@ import { ref } from 'vue'
 import useSignup from "../composables/useSignup"
 
 export default {
-    setup(){
+    setup(props,context){
         let displayName = ref("");
         let email = ref("");
         let password = ref("");
@@ -26,7 +26,10 @@ export default {
         
         let SignUp=async()=>{
             let res = await createAccount(email.value,password.value,displayName.value)
-            console.log(res.user);
+            // console.log(res.user);
+            if(res){
+                context.emit("enterChatroom")
+            }
         }
         
         return {displayName,email,password,SignUp,error} //return error in order to use in page
