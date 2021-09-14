@@ -15,7 +15,7 @@ let createAccount =async(email,password,displayName) => {
                 // to check & update displayName
                 res.user.updateProfile({ displayName })
                 
-                return res;
+                return res;//to be usable at Signup.vue function
                 // console.log(res.user);
             }
             catch(err){

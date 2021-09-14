@@ -4,6 +4,9 @@
         <input type="text" placeholder="Display Text" v-model="displayName">
         <input type="email" placeholder="Email Here" v-model="email">
         <input type="password" placeholder="Password Here" v-model="password">
+        <div class="error" v-if="error">
+            {{error}}
+        </div>        
 
         <button>Submit</button>
     </form>
@@ -20,13 +23,13 @@ export default {
         let password = ref("");
 
         let {error,createAccount} = useSignup()//taking Parameters form useSignup Components
-
+        
         let SignUp=async()=>{
             let res = await createAccount(email.value,password.value,displayName.value)
             console.log(res.user);
         }
         
-        return {displayName,email,password,SignUp}
+        return {displayName,email,password,SignUp,error} //return error in order to use in page
     }
 }
 </script>
