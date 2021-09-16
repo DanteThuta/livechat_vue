@@ -1,27 +1,36 @@
 <template>
-  <nav>
-      <div>
-        <p>Hi display Name</p>
-        <p class="email"> logged in as Email</p>
-      </div>
-      <button @click="logout">Logout</button>
+    <div v-if="user">
+        <nav>
+            <div>
+                <p>Hi </p>
+                <p>hello</p>
+                <p class="email">dfdf </p>
+                <p class="email"> logged in as {{user.email}} </p>
+            </div>
+            <button @click="logout">Logout</button>
       
-  </nav>
+        </nav>
+    </div>
+  
 </template>
 
 <script>
 import { ref } from '@vue/reactivity'
 import {auth} from '../firebase/config'
 import useLogout from '../composables/useLogout'
+import getUser from '../composables/getUser'
 export default {
     setup(){
 
+        //composable logOut Function
         let {error,Logout} = useLogout();
         let logout=async()=>{
             await Logout();
         }
 
-        return {error,logout}
+        //composable getUser Function
+        let {user} = getUser();
+        return {error,logout,user}
     }
 
 }
@@ -37,7 +46,8 @@ export default {
   }
 
   nav p{
-    margin: 2px auto;
+    margin: 2px;
+    padding: 5px;
     font-size: 16px;
     color: #444;
   }
