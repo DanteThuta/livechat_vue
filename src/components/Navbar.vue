@@ -2,7 +2,7 @@
     <div v-if="user">
         <nav>
             <div>
-                <p>Hi </p>
+                <p>Hi {{user.displayName}}  {{user.displayName}}  {{user.displayName}} </p>
                 <p>hello</p>
                 <p class="email">dfdf </p>
                 <p class="email"> logged in as {{user.email}} </p>
