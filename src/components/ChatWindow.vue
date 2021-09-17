@@ -1,23 +1,41 @@
 <template>
   <div class="chat-window">
-    <div class="messages">
+    <div class="messages" v-for="message in messages" :key="message.id">
       <div class="single">
-          <span class="created_at">jjj</span>
-          <span class="name">jjj</span>
-          <span class="message">jjj</span>
+          <span class="created_at">13 mins ago</span>
+          <span class="name">{{message.name}}</span>
+          <span class="message">{{message.message}}</span>
       </div>
-      <div class="single">
-          <span class="created_at">jjj</span>
-          <span class="name">jjj</span>
-          <span class="message">jjj</span>
-      </div>
+      
     </div>
   </div>
 </template>
 
 <script>
+import { ref } from '@vue/reactivity'
+import {db} from '../firebase/config'
 export default {
+    setup(){
+      let messages = ref([]);
+      //retrieving messages from Firebase
+      db.collection("messages").orderBy("created_at").onSnapshot((snap)=>{
+        let results = [];
+        // console.log(snap.docs);
+        snap.docs.forEach((doc)=>{
+          
+          // console.log(doc.data()); //checking by single message
+          let document = {...doc.data(),id:doc.id} //retrieving with ID
+          // console.log(document);
+          results.push(document);
+          
+        })
+        // console.log(results);
+        messages.value=results;
+        console.log(messages.value);
+      })
 
+      return {messages};
+    }
 }
 </script>
 
