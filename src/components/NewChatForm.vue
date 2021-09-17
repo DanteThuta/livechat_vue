@@ -1,6 +1,7 @@
 <template>
   <textarea 
-  placeholder="text message and Press Enter" v-model="message" @keypress.enter="handleSubmit"
+  placeholder="text message and Press Enter" v-model="message"
+   @keypress.enter="handleSubmit"
   ></textarea>
 </template>
 
@@ -8,17 +9,21 @@
 import { ref } from '@vue/reactivity'
 import getUser from '../composables/getUser'
 import {timestamp} from '../firebase/config'
+import useCollection from '../composables/useCollection'
 export default {
     setup(){
         let message = ref("");
         let {user} = getUser();
-        let handleSubmit=()=>{
+        let {error,addDoc} = useCollection("messages");
+        
+        let handleSubmit=async()=>{
             let chat={
                 message: message.value,
                 name: user.value.displayName,
                 created_at : timestamp()
             }
-            console.log(chat);
+            await addDoc(chat);
+            // console.log(chat);
             message.value = ""; //to remove the current message in Textarea
         }
 
