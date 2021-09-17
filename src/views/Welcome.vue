@@ -6,7 +6,7 @@
           <p>Not a Member? <span @click="showLoginform=!showLoginform">SignUp Here </span></p>
       </div>
       <div v-else>
-          <Signup @enterChatroom = "enterChatroom" />
+          <Signup @enterChatroom ="enterChatroom" />
           <p>Already a Member? <span  @click="showLoginform=!showLoginform">Login Here</span></p>
       </div>
       

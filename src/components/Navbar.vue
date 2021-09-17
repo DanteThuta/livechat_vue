@@ -1,16 +1,14 @@
 <template>
-    <div v-if="user">
-        <nav>
+    
+        <nav v-if="user">
             <div>
-                <p>Hi {{user.displayName}}  {{user.displayName}}  {{user.displayName}} </p>
-                <p>hello</p>
-                <p class="email">dfdf </p>
+                <p>Hi,{{user.displayName}}</p>
                 <p class="email"> logged in as {{user.email}} </p>
             </div>
             <button @click="logout">Logout</button>
       
         </nav>
-    </div>
+    
   
 </template>
 

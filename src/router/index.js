@@ -13,7 +13,7 @@ const routes = [
     path: '/chatroom',
     name: 'Chatroom',
     component: Chatroom,
-    beforeEnter(to, from, next) { //Route Guard for No-login Users
+    beforeEnter(to, from, next) { //Route Guard for Unregistered-Users
       let user = auth.currentUser;
       if (user) {
         next();
