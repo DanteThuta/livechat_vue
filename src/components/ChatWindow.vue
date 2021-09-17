@@ -1,8 +1,8 @@
 <template>
   <div class="chat-window">
-    <div class="messages" v-for="message in messages" :key="message.id">
-      <div class="single">
-          <span class="created_at">{{message.created_at.toDate()}}</span>
+    <div class="messages" >
+      <div class="single" v-for="message in formattedMessages" :key="message.id">
+          <span class="created_at">{{message.created_at}}</span>
           <span class="name">{{message.name}}</span>
           <span class="message">{{message.message}}</span>
       </div>
@@ -12,11 +12,19 @@
 </template>
 
 <script>
-import { ref } from '@vue/reactivity'
+import { computed, ref } from '@vue/reactivity'
 import {db} from '../firebase/config'
+import {formatDistanceToNow} from 'date-fns'
 export default {
     setup(){
       let messages = ref([]);
+
+      let formattedMessages = computed(()=>{
+        return messages.value.map((msg)=>{
+          let formatTime = formatDistanceToNow(msg.created_at.toDate()); 
+          return {...msg,created_at:formatTime}
+        })
+      })
       //retrieving messages from Firebase
       db.collection("messages").orderBy("created_at").onSnapshot((snap)=>{
         let results = [];
@@ -27,15 +35,15 @@ export default {
           let document = {...doc.data(),id:doc.id} //retrieving with ID
           // console.log(document);
 
-          //(*)Will only run at a time if there is no Timestamp , if not, console error for being Null
-          doc.data().created_at && results.push(document);
+          
+          doc.data().created_at && results.push(document);//(*)Will only run at a time if there is no Timestamp , if not, console error for being Null
         })
         // console.log(results);
         messages.value=results;
         // console.log(messages.value);
       })
 
-      return {messages};
+      return {messages,formattedMessages};
     }
 }
 </script>
