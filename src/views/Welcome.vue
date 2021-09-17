@@ -39,43 +39,35 @@ export default {
 
 <style>
 
-.container{
-    text-align: center;
-    justify-content: center;
-    padding: 20px 0;
-}
-
-/* form styles */
-
-.welcome form{
-  width: 300px;
-  margin: 30px auto;
-}
-
-.welcome label{
-  display: block;
-  margin: 20px 0 20px;
-}
-
-.welcome input{
-  padding: 10px;
-  border: 3px solid #eee;
-  border-radius: 10px;
-  margin: 20px auto;
-  outline: 0;
-  width: 100%;
-  color: #999;
-  
-}
-
-.welcome span{
-  font-weight: bold;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.welcome button{
-  margin: 20px auto;
-}
+ .welcome {
+        text-align: center;
+        padding: 20px 0;
+      }
+  /* form styles */
+  .welcome form {
+    width: 300px;
+    margin: 20px auto;
+  }
+  /* .welcome label {
+    display: block;
+    margin: 20px 0 10px;
+  } */
+  .welcome input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #eee;
+    outline: none;
+    color: #999;
+    margin: 10px auto;
+  }
+  .welcome span{
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .welcome button {
+    margin: 20px auto;
+  }
 
 </style>

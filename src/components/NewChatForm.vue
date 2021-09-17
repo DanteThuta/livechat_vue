@@ -14,7 +14,7 @@ export default {
     setup(){
         let message = ref("");
         let {user} = getUser();
-        let {error,addDoc} = useCollection("messages");
+        let {error,addDoc} = useCollection("messages");//new collection named "messages"
         
         let handleSubmit=async()=>{
             let chat={
